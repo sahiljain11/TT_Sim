@@ -1,0 +1,151 @@
+<mujoco model="#TT001">
+	<compiler angle="degree" inertiafromgeom="true"/>
+
+	<option timestep="0.003" iterations="50" solver="Newton" jacobian="sparse" cone="elliptic" tolerance="1e-10"/>
+
+	<size njmax="5000" nconmax="2000" nstack="5000000"/>
+
+	<default>
+		<geom solimp=".9 .9 .01"/>        
+
+		<default class="table">
+			<geom type="box" material="geom" rgba=".1176 .5450 .7647 1" size=".7625 1.37 0.025"/>
+		</default>
+
+		<default class="net">
+			<geom type="box" material="geom" rgba=".0156 .5765 .4471 1" size=".7625 0.025 0.07625"/>
+		</default>
+
+		<default class="support">
+			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size=".0508 .0204 .805"/>
+		</default>
+
+		<default class="arm1">
+			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size=".18 .01905 .003175"/>
+		</default>
+
+		<default class="arm2">
+			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size=".18 .01905 .003175"/>
+		</default>
+
+		<default class="axle1">
+			<geom type="cylinder" material="geom" rgba=".6627 .6627 .6627 1" size=".0025 .12"/>
+		</default>
+
+		<default class="axle2">
+			<geom type="cylinder" material="geom" rgba=".6627 .6627 .6627 1" size=".0025 .04"/>
+		</default>
+
+		<default class="handle">
+			<geom type="box" material="geom" rgba=".1372549 .168627 .168627 1" size=".01508125 .0508 .009525"/>
+		</default>
+
+		<default class="paddle">
+			<geom type="ellipsoid" material="geom" rgba=".75294 .2235 .16862 1" size=".0762 .0877 .0047625"/>
+		</default>
+	</default>
+
+	<asset>
+		<texture type="skybox" builtin="gradient" width="128" height="128" rgb1=".4 .6 .8" rgb2="0 0 0"/>  
+		<texture name="texgeom" type="cube" builtin="flat" mark="cross" width="128" height="128" 
+		    rgb1="0.6 0.6 0.6" rgb2="0.6 0.6 0.6" markrgb="1 1 1"/>  
+		<texture name="texplane" type="2d" builtin="checker" rgb1=".4 .4 .4" rgb2=".6 .6 .6" 
+		    width="512" height="512"/>  
+		<material name='geom' texture="texgeom" texuniform="true"/>
+		<material name='MatPlane' reflectance='0.3' texture="texplane" texrepeat="1 1" texuniform="true"/>
+	</asset>
+
+	<visual>
+		<quality shadowsize="4096" offsamples="8"/>
+		<map znear="0.1" force="0.05"/>
+	</visual>
+
+	<statistic extent="4"/>
+
+	<worldbody>
+		<light directional="true" diffuse=".8 .8 .8" pos="0 0 10" dir="0 0 -10"/>
+
+		<geom pos="0 0 0" type="plane" size="5 5 .5" rgba=".7 .7 .7 1" material="MatPlane"/>
+
+		<body pos="0 0 .76">
+		    <geom class="table"/>
+		</body>
+
+		<body pos="0 0 .9">
+		    <geom class="net"/>
+		</body>
+
+		<body>
+			<body pos="0 1.6 .805">
+				    <geom class="support"/>
+			</body>
+			<body pos="0 1.7 .805">
+				    <geom class="support"/>
+		    	</body>
+
+			<joint name="joint1" type="hinge" pos="0 3.27 1.75" axis="0 0 1"/>
+
+			<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+
+			<body pos="0 1.62 1.55" quat="0 0 .5 .5">
+				<joint name="joint2" type="hinge" pos="0 0 0" axis="0 0 1"/>
+
+				<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+				<geom class="axle1"/>
+
+				<body pos=".16 0 -.06">
+					<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+					<geom class="arm1"/>
+				</body>
+
+				<body pos=".16 0 -.11">
+					<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+					<geom class="arm1"/>
+				</body>
+
+				<body pos=".32 0 -.085">
+					<joint name="joint3" type="hinge" pos="0 0 0" axis="0 0 1"/>
+
+					<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+					<geom class="axle2"/>
+
+					<body pos="0 -.16 .035" quat="0 .5 .5 0">
+						<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+						<geom class="arm2"/>
+					</body>
+
+					<body pos="0 -.16 -.035" quat="0 .5 .5 0">
+						<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+						<geom class="arm2"/>
+					</body>
+
+					<body pos="0 -.32 0">
+						<joint name="joint4" type="hinge" pos="0 0 0" axis="1 0 0"/>
+
+						<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+						<geom class="axle2" quat="0 .5 0 .5"/>
+
+						<body pos="0 -.02 0">
+							<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+							<geom class="handle"/>
+						</body>
+
+						<body pos="0 -.15 0">
+							<inertial pos="0 0 0" mass="1" diaginertia="1 1 1"/>
+							<geom class="paddle"/>
+						</body>
+
+
+					</body>
+				</body>
+
+			</body>
+		</body>
+
+	</worldbody>
+
+	<actuator>
+		<!motor gear="1" joint="joint1"/>
+		<!motor gear="400 400 400 400 400 400" joint="joint3"/>
+	</actuator>
+</mujoco>
