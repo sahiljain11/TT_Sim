@@ -6,7 +6,7 @@ XML_PATH = "/tableTennis.xml"
 
 #imported from openAI gym's assets: https://github.com/openai/gym/blob/master/gym/envs/mujoco/inverted_pendulum.py
 
-class TableTennis(mujoco_env.MujocoEnv, utils.EzPickle):
+class TableTennisEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def __init__(self):
         utils.EzPickle.__init__(self)
         mujoco_env.MujocoEnv.__init__(self, XML_PATH, 2)

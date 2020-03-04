@@ -9,15 +9,27 @@
 		<geom solimp=".9 .9 .01"/>        
 
 		<default class="table">
-			<geom type="box" material="geom" rgba=".1176 .5450 .7647 1" size=".7625 1.37 0.025"/>
+			<geom type="box" material="geom" rgba=".1176 .5450 .7647 1" size=".7625 0.685 0.0635"/>
 		</default>
 
 		<default class="net">
 			<geom type="box" material="geom" rgba=".0156 .5765 .4471 1" size=".7625 0.025 0.07625"/>
 		</default>
 
+		<default class="base1">
+			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size=".04445 .3175 .01905"/>
+		</default>
+
+		<default class="base2">
+			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size=".01905 .3556 .04445"/>
+		</default>
+
+		<default class="base3">
+			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size=".4575 .01905 .04445"/>
+		</default>
+
 		<default class="support">
-			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size=".0508 .0204 .805"/>
+			<geom type="box" material="geom" rgba=".8706 .7216 .5294 1" size="0.04445 .01905 .805"/>
 		</default>
 
 		<default class="arm1">
@@ -67,7 +79,11 @@
 
 		<geom pos="0 0 0" type="plane" size="5 5 .5" rgba=".7 .7 .7 1" material="MatPlane"/>
 
-		<body pos="0 0 .76">
+		<body pos="0 -.635 .758825">
+		    <geom class="table"/>
+		</body>
+
+		<body pos="0 .635 .758825">
 		    <geom class="table"/>
 		</body>
 
@@ -76,6 +92,26 @@
 		</body>
 
 		<body>
+			<body pos="0 1.65 0.022225">
+				<geom class="base1"/>
+			</body>
+
+			<body pos="-.47655 1.65 0.022225">
+				<geom class="base2"/>
+			</body>
+
+			<body pos=".47655 1.65 0.022225">
+				<geom class="base2"/>
+			</body>
+
+			<body pos="0 1.98655 0.022225">
+				<geom class="base3"/>
+			</body>
+
+			<body pos="0 1.31345 0.022225">
+				<geom class="base3"/>
+			</body>
+
 			<body pos="0 1.6 .805">
 				    <geom class="support"/>
 			</body>
